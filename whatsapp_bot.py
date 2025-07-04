@@ -91,12 +91,12 @@ def run_menu_bot(file_path, group_id, start_date):
 # Contoh penggunaan
 if __name__ == "__main__":
     file_path = "dataset_menu_30_hari.csv"
-    group_id = os.getenv("WHATSAPP_GROUP_ID")  # Ambil ID grup dari .env
+    group_id = os.getenv("TWILIO_VERIFIED_NUMBER")  # Ambil ID grup dari .env
     start_date = datetime(2025, 7, 4)  # Tanggal mulai
     
     if group_id is None:
-        logger.error("WHATSAPP_GROUP_ID tidak ditemukan di file .env")
-        raise ValueError("WHATSAPP_GROUP_ID tidak ditemukan di file .env")
+        logger.error("TWILIO_VERIFIED_NUMBER tidak ditemukan di file .env")
+        raise ValueError("TWILIO_VERIFIED_NUMBER tidak ditemukan di file .env")
     
     logger.info(f"Memulai bot WhatsApp dengan Twilio, nomor pengirim: {twilio_whatsapp_number}, nomor tujuan: {group_id}")
     run_menu_bot(file_path, group_id, start_date)
