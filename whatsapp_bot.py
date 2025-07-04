@@ -78,9 +78,9 @@ def run_menu_bot(file_path, group_id, start_date):
 
 # Contoh penggunaan
 if __name__ == "__main__":
-    file_path = "menu_30_hari.csv"
+    file_path = "dataset_menu_30_hari.csv"
     group_id = os.getenv("WHATSAPP_GROUP_ID")  # Ambil ID grup dari .env
-    start_date = datetime(2025, 7, 4)  # Tanggal mulai
+    start_date = datetime(2025, 7, 4)  # Tanggal mulai sesuaikan dengan waktu anda saat ini
     
     if group_id is None:
         logger.error("WHATSAPP_GROUP_ID tidak ditemukan di file .env")
@@ -88,3 +88,8 @@ if __name__ == "__main__":
     
     logger.info("Memulai bot WhatsApp")
     run_menu_bot(file_path, group_id, start_date)
+    
+    # make sure that your whatsapp web is open in your browser and logged in
+    # this output will make your contact in whatsapp send a message to the group using your contact manually because the bot is not able to send message automatically 
+    # you can use twilio to send message automatically
+    logger.info("Bot WhatsApp selesai dijalankan")
