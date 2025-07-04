@@ -71,7 +71,7 @@ def run_menu_bot(file_path, group_id, start_date):
 
 # Contoh penggunaan
 if __name__ == "__main__":
-    file_path = "menu_30_hari.csv"
+    file_path = "dataset_menu_30_hari.csv"
     group_id = os.getenv("WHATSAPP_GROUP_ID")  # Ambil ID grup dari .env
     start_date = datetime(2025, 7, 4)  # Tanggal mulai
     
