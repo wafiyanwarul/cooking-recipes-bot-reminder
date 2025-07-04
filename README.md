@@ -71,7 +71,7 @@ The bot sends one menu per day (or in testing mode, every minute) to a specified
      ```
    - Edit `.env` with your Twilio credentials and verified WhatsApp number:
      ```plaintext
-     WHATSAPP_GROUP_ID=+6281234567890  # Your verified WhatsApp number
+     TWILIO_VERIFIED_NUMBER=+6281234567890  # Your verified WhatsApp number
      TWILIO_ACCOUNT_SID=your_account_sid
      TWILIO_AUTH_TOKEN=your_auth_token
      TWILIO_WHATSAPP_NUMBER=+14155238886  # Twilio WhatsApp number
