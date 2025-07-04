@@ -98,7 +98,7 @@ The bot sends one menu per day (or in testing mode, every minute) to a specified
        send_time = datetime.now() + timedelta(minutes=1)
        time_to_wait = (send_time - datetime.now()).total_seconds()
        if time_to_wait > 0:
-           logger.info(f"Menunggu {time_to_wait} detik hingga {send_time} untuk hari {day}, nomor tujuan: whatsapp:{group_id}")
+           logger.info(f"Menunggu {time_to_wait} detik hingga {send_time} untuk hari {day}, nomor tujuan: whatsapp:{verified_phone_number}")
            time.sleep(time_to_wait)
        # With this:
        send_date = datetime.now().replace(hour=5, minute=0, second=0, microsecond=0)
@@ -106,20 +106,20 @@ The bot sends one menu per day (or in testing mode, every minute) to a specified
            send_date += timedelta(days=1)
        time_to_wait = (send_date - datetime.now()).total_seconds()
        if time_to_wait > 0:
-           logger.info(f"Menunggu {time_to_wait} detik hingga {send_date} untuk hari {day}, nomor tujuan: whatsapp:{group_id}")
+           logger.info(f"Menunggu {time_to_wait} detik hingga {send_date} untuk hari {day}, nomor tujuan: whatsapp:{verified_phone_number}")
            time.sleep(time_to_wait)
        ```
      - In `run_menu_bot`, replace the loop logic:
        ```python
        # Replace this:
-       send_whatsapp_message(group_id, message, day)
+       send_whatsapp_message(verified_phone_number, message, day)
        logger.info(f"Selesai mengirim pesan untuk hari {day}, menunggu 60 detik sebelum lanjut")
        time.sleep(60)
        # With this:
        send_date = start_date + timedelta(days=index)
        current_date = datetime.now().date()
        if send_date.date() >= current_date:
-           send_whatsapp_message(group_id, message, day)
+           send_whatsapp_message(verified_phone_number, message, day)
            logger.info(f"Selesai mengirim pesan untuk hari {day}, menunggu hingga hari berikutnya")
            time.sleep(86400)
        else:
