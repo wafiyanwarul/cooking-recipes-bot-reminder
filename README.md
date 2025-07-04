@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # WhatsApp Menu Bot (PyWhatKit)
 
 ![Python](https://img.shields.io/badge/python-3.8%2B-blue)
@@ -7,16 +6,6 @@
 ![Status](https://img.shields.io/badge/status-active-brightgreen)
 
 A WhatsApp bot that sends daily menu recipes to a specified WhatsApp group at 05:00 WIB (Western Indonesia Time) using the PyWhatKit library. The bot reads a 30-day menu dataset from a CSV file and sends formatted messages containing the menu, ingredients, seasonings, price, and cooking instructions.
-=======
-# WhatsApp Menu Bot
-
-![Python](https://img.shields.io/badge/python-3.8%2B-blue)
-![Twilio](https://img.shields.io/badge/Twilio-API-red)
-![License](https://img.shields.io/badge/license-MIT-green)
-![Status](https://img.shields.io/badge/status-active-brightgreen)
-
-A WhatsApp bot that sends daily menu recipes to a specified WhatsApp number using the Twilio API. The bot reads a 30-day menu dataset from a CSV file and sends formatted messages containing the menu, ingredients, seasonings, price, and cooking instructions.
->>>>>>> 8bd1afed5ff39608abfcf18afee7480c765d01a4
 
 ## Table of Contents
 - [Project Overview](#project-overview)
@@ -26,29 +15,19 @@ A WhatsApp bot that sends daily menu recipes to a specified WhatsApp number usin
 - [Configuration](#configuration)
 - [Running the Bot](#running-the-bot)
 - [Dataset](#dataset)
-<<<<<<< HEAD
 - [Limitations](#limitations)
-=======
->>>>>>> 8bd1afed5ff39608abfcf18afee7480c765d01a4
 - [Contributing](#contributing)
 - [License](#license)
 
 ## Project Overview
-<<<<<<< HEAD
 This project automates the daily sharing of cooking recipes to a WhatsApp group. It uses a CSV file (`dataset_menu_30_hari.csv`) containing 30 days of menu data, including:
 - Day number (`Hari`)
 - Menu name (`Menu`)
-=======
-This project automates the daily sharing of cooking recipes via WhatsApp. It uses a CSV file (`dataset_menu_30_hari.csv`) containing 30 days of menu data, including:
-- Day number
-- Menu name
->>>>>>> 8bd1afed5ff39608abfcf18afee7480c765d01a4
 - Ingredients (`Bahan`)
 - Seasonings (`Bumbu`)
 - Price (`Harga`)
 - Cooking instructions (`Tutorial`)
 
-<<<<<<< HEAD
 The bot sends one menu per day at 05:00 WIB to a specified WhatsApp group using PyWhatKit, which automates WhatsApp Web. All activities are logged in `bot.log` for debugging and monitoring.
 
 **Note**: This bot uses your personal WhatsApp account via WhatsApp Web, so messages will appear as sent from your number.
@@ -58,27 +37,13 @@ The bot sends one menu per day at 05:00 WIB to a specified WhatsApp group using 
 - Reads menu data from a CSV file.
 - Logs all actions (CSV reading, message sending, errors) to a file (`bot.log`) and console.
 - Securely stores the WhatsApp group ID using a `.env` file.
-=======
-The bot sends one menu per day (or in testing mode, every minute) to a specified WhatsApp number using Twilio's WhatsApp API. All activities are logged in `bot.log` for debugging and monitoring.
-
-## Features
-- Sends daily menu recipes to a WhatsApp number.
-- Supports testing mode (sends messages every minute).
-- Logs all actions (CSV reading, message sending, errors) to a file and console.
-- Securely stores Twilio credentials using a `.env` file.
->>>>>>> 8bd1afed5ff39608abfcf18afee7480c765d01a4
 - Easy to configure and extend for other datasets or schedules.
 
 ## Prerequisites
 - **Python 3.8+** installed on your system.
-<<<<<<< HEAD
 - A **WhatsApp account** with access to WhatsApp Web.
 - A **WhatsApp group** where you are an admin (to obtain the group ID).
 - A web browser (e.g., Chrome, Firefox) for WhatsApp Web automation.
-=======
-- A **Twilio account** with an active WhatsApp-enabled number (free trial available).
-- A **verified WhatsApp number** for receiving messages (required in Twilio trial mode).
->>>>>>> 8bd1afed5ff39608abfcf18afee7480c765d01a4
 - Git installed for cloning the repository.
 
 ## Installation
