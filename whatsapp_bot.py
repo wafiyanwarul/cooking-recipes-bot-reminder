@@ -46,13 +46,11 @@ def read_menu_csv(file_path):
 # Mengirim pesan ke nomor WhatsApp menggunakan Twilio
 def send_whatsapp_message(verified_phone_number, message, day):
     try:
-        # Hitung waktu pengiriman (05:00 WIB)
-        send_date = datetime.now().replace(hour=5, minute=0, second=0, microsecond=0)
-        if send_date < datetime.now():
-            send_date += timedelta(days=1)  # Jadwalkan untuk besok jika sudah lewat 05:00
-        time_to_wait = (send_date - datetime.now()).total_seconds()
+        # Tunggu 1 menit untuk pengiriman
+        send_time = datetime.now() + timedelta(minutes=1)
+        time_to_wait = (send_time - datetime.now()).total_seconds()
         if time_to_wait > 0:
-            logger.info(f"Menunggu {time_to_wait} detik hingga {send_date} untuk hari {day}, nomor tujuan: whatsapp:{verified_phone_number}")
+            logger.info(f"Menunggu {time_to_wait} detik hingga {send_time} untuk hari {day}, nomor tujuan: whatsapp:{verified_phone_number}")
             time.sleep(time_to_wait)
         
         # Kirim pesan menggunakan Twilio
@@ -61,7 +59,7 @@ def send_whatsapp_message(verified_phone_number, message, day):
             from_=f"whatsapp:{twilio_whatsapp_number}",
             to=f"whatsapp:{verified_phone_number}"
         )
-        logger.info(f"Pesan dikirim untuk hari {day} ke nomor whatsapp:{verified_phone_number} pada {send_date}, SID: {message_obj.sid}, Status: {message_obj.status}")
+        logger.info(f"Pesan dikirim untuk hari {day} ke nomor whatsapp:{verified_phone_number} pada {send_time}, SID: {message_obj.sid}, Status: {message_obj.status}")
     except Exception as e:
         logger.error(f"Gagal mengirim pesan untuk hari {day} ke nomor whatsapp:{verified_phone_number}: {str(e)}")
         raise
@@ -82,16 +80,9 @@ def run_menu_bot(file_path, verified_phone_number, start_date):
             # Format pesan
             message = f"Hari {day}:\nMenu: {menu}\nBahan: {bahan}\nBumbu: {bumbu}\nHarga: Rp{harga}\nTutorial: {tutorial}"
             
-            # Hitung tanggal pengiriman
-            send_date = start_date + timedelta(days=index)
-            current_date = datetime.now().date()
-            
-            if send_date.date() >= current_date:
-                send_whatsapp_message(verified_phone_number, message, day)
-                logger.info(f"Selesai mengirim pesan untuk hari {day}, menunggu hingga hari berikutnya")
-                time.sleep(86400)  # Tunggu 24 jam untuk hari berikutnya
-            else:
-                logger.info(f"Melewati hari {day} karena tanggal {send_date.date()} sudah lewat")
+            send_whatsapp_message(verified_phone_number, message, day)
+            logger.info(f"Selesai mengirim pesan untuk hari {day}, menunggu 60 detik sebelum lanjut")
+            time.sleep(60)  # Tunggu 1 menit untuk menghindari spam
                 
     except Exception as e:
         logger.error(f"Error dalam run_menu_bot: {str(e)}")
