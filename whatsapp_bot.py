@@ -55,22 +55,15 @@ def run_menu_bot(file_path, group_id, start_date):
             # Format pesan
             message = f"Hari {day}:\nMenu: {menu}\nBahan: {bahan}\nBumbu: {bumbu}\nHarga: Rp{harga}\nTutorial: {tutorial}"
             
-            # Hitung tanggal pengiriman
-            send_date = start_date + timedelta(days=index)
-            current_date = datetime.now().date()
-            
-            if send_date.date() >= current_date:
-                logger.info(f"Menjadwalkan pengiriman untuk hari {day} pada {send_date}")
-                # Tunggu hingga waktu pengiriman (05:00 WIB)
-                time_to_wait = (send_date.replace(hour=5, minute=0, second=0) - datetime.now()).total_seconds()
-                if time_to_wait > 0:
-                    logger.info(f"Menunggu {time_to_wait} detik hingga pukul 05:00 WIB")
-                    time.sleep(time_to_wait)
-                send_whatsapp_message(group_id, message, day)
-                logger.info(f"Selesai mengirim pesan untuk hari {day}, menunggu 60 detik sebelum lanjut")
-                time.sleep(60)  # Tunggu 1 menit untuk menghindari spam
-            else:
-                logger.info(f"Melewati hari {day} karena tanggal {send_date.date()} sudah lewat")
+            # Hitung waktu pengiriman (3 menit dari sekarang)
+            send_time = datetime.now() + timedelta(minutes=3)
+            logger.info(f"Menjadwalkan pengiriman untuk hari {day} pada {send_time}")
+            # Tunggu hingga waktu pengiriman
+            time_to_wait = (send_time - datetime.now()).total_seconds()
+            if time_to_wait > 0:
+                logger.info(f"Menunggu {time_to_wait} detik hingga {send_time}")
+                time.sleep(time_to_wait)
+            send_whatsapp_message(group_id, message, day)
                 
     except Exception as e:
         logger.error(f"Error dalam run_menu_bot: {str(e)}")
